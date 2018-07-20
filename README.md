@@ -2,11 +2,11 @@
 C# library for clustering map points. This library is very suitable for WebAPI (and similar-type) projects that don't depend on ASP.Net MVC.
 
 
-![Clustering Img](https://raw.githubusercontent.com/pootzko/GoogleMaps.AspNetCore.Clustering/master/cluster-map.png "clustering image")
+![Clustering Img](https://raw.githubusercontent.com/bastienlemaitre/GoogleMaps.AspNetCore.Clustering/master/cluster-map.png "clustering image")
 
 **Original Lib**  
-This is a fork of [GoogleMaps.AspNetCore.Clustering
-](https://github.com/pootzko/GoogleMaps.AspNetCore.Clustering) repo. The project was no longer powered since December 8, 2016 and incompatible with dotnetcore.
+This is a fork of [GoogleMaps.Net.Clustering
+](https://github.com/pootzko/GoogleMaps.Net.Clustering) repo. The project was no longer powered since December 8, 2016 and incompatible with dotnetcore.
 
 **Installation**  
 
