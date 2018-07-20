@@ -1,6 +1,5 @@
 # GoogleMaps.AspNetCore.Clustering
-C# library for clustering map points. This library is very suitable for WebAPI (and similar-type) projects that don't depend on ASP.Net MVC.
-
+C# library for clustering map points for AspNetCore 2.1
 
 ![Clustering Img](https://raw.githubusercontent.com/bastienlemaitre/GoogleMaps.AspNetCore.Clustering/master/cluster-map.png "clustering image")
 
@@ -14,8 +13,48 @@ You can download the [GoogleMaps.AspNetCore.Clustering](https://www.nuget.org/pa
 
 ## Usage
 
-This is an example of how to used cached clustering.
+First, configure `Startup.cs` class:
+```cs
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
 
+    public IConfiguration Configuration { get; }
+    
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        ...
+        app.UseGmc(Configuration.GetSection("GoogleMapsNetClustering"));
+        ...
+    }
+}
+
+```
+You will also need to add the following section to your `appsettings.json` file.
+
+```json
+"GoogleMapsNetClustering": {
+    "DoShowGridLinesInGoogleMap": false,
+    "OuterGridExtend": 0,
+    "DoUpdateAllCentroidsToNearestContainingPoint": false,
+    "DoMergeGridIfCentroidsAreCloseToEachOther": true,
+    "CacheServices": true,
+    "MergeWithin": 2.9,
+    "MinClusterSize": 2,
+    "MaxMarkersReturned": 500,
+    "AlwaysClusteringEnabledWhenZoomLevelLess": 2,
+    "ZoomlevelClusterStop": 15,
+    "GridX": 6,
+    "GridY": 5,
+    "MarkerTypes": [1,2,3],
+    "MaxPointsInCache": 100000000
+  },
+```
+
+Next, this is an example of how to used cached clustering.
 ```cs
 public IList<MapPoint> GetClusters(YourFilterObj filter)
 {
@@ -51,25 +90,4 @@ private PointCollection GetClusterPointCollection(string clusterPointsCacheKey)
 
     return points;
 }
-```
-
-You will also need to add the following section to your `appsettings.json` file.
-
-```json
-"GoogleMapsNetClustering": {
-    "DoShowGridLinesInGoogleMap": false,
-    "OuterGridExtend": 0,
-    "DoUpdateAllCentroidsToNearestContainingPoint": false,
-    "DoMergeGridIfCentroidsAreCloseToEachOther": true,
-    "CacheServices": true,
-    "MergeWithin": 2.9,
-    "MinClusterSize": 2,
-    "MaxMarkersReturned": 500,
-    "AlwaysClusteringEnabledWhenZoomLevelLess": 2,
-    "ZoomlevelClusterStop": 15,
-    "GridX": 6,
-    "GridY": 5,
-    "MarkerTypes": [1,2,3],
-    "MaxPointsInCache": 100000000
-  },
 ```
